@@ -74,8 +74,8 @@ $(".list-group").on("click","p", function() {
     .closest(".list-group-item")
     .index();
 
-  tasks[status][index].text = Text;
-  saveTasks();
+    tasks[status][index].text = text;
+    saveTasks();
 
     // recreate p element
     var taskP = $("<p>")

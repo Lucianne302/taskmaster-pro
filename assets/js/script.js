@@ -151,7 +151,7 @@ $("#task-form-modal").on("shown.bs.modal", function() {
 });
 
 // save button in modal was clicked
-$("#task-form-modal .btn-primary").click(function() {
+$("#task-form-modal .btn-save").click(function() {
   // get form values
   var taskText = $("#modalTaskDescription").val();
   var taskDate = $("#modalDueDate").val();
@@ -193,15 +193,19 @@ $(".card .list-group").sortable({
   helper: "clone",
   activate: function(event) {
     console.log("activate", this);
+    $(this).addClass("dropover", "bottom-trash-drag");
   },
   deactivate: function(event) {
     console.log("deactivate", this);
+    //$(this).addClass("dropover");
   },
   over: function(event) {
     console.log("over", event.target);
+    $(event.target).addClass("dropover-active");
   },
   out: function(event) {
     console.log("out", event.target);
+    //$(event.target).addClass("dropover-active");
   },
   update: function(event) {
     // loop over current set of children in sortable list
@@ -282,6 +286,12 @@ var auditTask = function(taskEl){
     $(taskEl).addClass("list-group-item-warning");
   }
 };
+
+setInterval(function() {
+  $(".card .list-group-item").each(function (el) {
+    auditTask(el);
+  });
+}, (1000*60)*30);
 
 // load tasks for the first time
 loadTasks();
